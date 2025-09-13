@@ -40,7 +40,7 @@ st.write("Predict **daily stock index % change** using macroeconomic indicators.
 
 
 # --- Sidebar for Input Features ---
-st.sidebar.header("Input Features")
+st.sidebar.header("📊 Input Features")
 
 # Function to get user input
 def user_input_features():
@@ -103,10 +103,6 @@ def user_input_features():
 input_df = user_input_features()
 
 # --Feature Engineering---
-# Example: Creating a new feature - Debt to Market Cap Ratio
-# input_df["Debt_to_Market_Cap"] = (input_df["Government_Debt_GDP_Percent"] * input_df["Market_Cap_Trillion_USD"]) / 100
-# input_df["Debt_to_Market_Cap"] = input_df["Debt_to_Market_Cap"].replace([float('inf'), -float('inf')], 0).fillna(0)
-
 input_df["inflation_interest"] = input_df["Inflation_Rate_Percent"] * input_df["Interest_Rate_Percent"]
 input_df["gdp_minus_unemp"] = input_df["GDP_Growth_Rate_Percent"] - input_df["Unemployment_Rate_Percent"]
 input_df["oil_gold_ratio"] = input_df["Oil_Price_USD_Barrel"] / input_df["Gold_Price_USD_Ounce"]
