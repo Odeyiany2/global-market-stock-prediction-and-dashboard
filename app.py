@@ -167,10 +167,12 @@ if st.sidebar.button("Predict Stock Index Change"):
     st.metric(label="Predicted Daily % Change", value=f"{prediction:.2f}%")
     st.caption(f"Expected range: {lower_bound:.2f}% → {upper_bound:.2f}%")
 
-    st.subheader("📈 Input Features used for Predictive Analysis")
+    st.markdown("### 📈 Input Features used for Predictive Analysis")
     #show the input features 
     st.write(input_df)
-    st.metric(label="**The Predicted Daily % Change is: **", value=f"{prediction:.2f}%")
+    # Display prediction interpretation
+    st.markdown(f"#### The model predicts a daily stock index change of **{prediction:.2f}%**.")
+    #st.metric(label="**The Predicted Daily % Change is: **", value=f"{prediction:.2f}%")
     if prediction > 0:
         st.success("The stock index is predicted to rise 📈")
     elif prediction < 0:
