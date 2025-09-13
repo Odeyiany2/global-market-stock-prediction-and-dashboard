@@ -25,6 +25,9 @@ body, p, div, h1, h2, h3, h4, h5, h6, label {
 [data-testid="stHeader"] {
     background: rgba(0,0,0,0);
 }
+[data-testid="stSidebar"] {
+    background: linear-gradient(135deg, #00b09b, #006400);
+}
 </style>
 """
 
@@ -100,7 +103,7 @@ input_df = user_input_features()
 
 # --Feature Engineering---
 # Example: Creating a new feature - Debt to Market Cap Ratio
-input_df["Debt_to_Market_Cap"] = (input_df["Government_Debt_to_GDP_Percent"] * input_df["Market_Cap_Trillion_USD"]) / 100
+input_df["Debt_to_Market_Cap"] = (input_df["Government_Debt_GDP_Percent"] * input_df["Market_Cap_Trillion_USD"]) / 100
 input_df["Debt_to_Market_Cap"] = input_df["Debt_to_Market_Cap"].replace([float('inf'), -float('inf')], 0).fillna(0)
 
 input_df["inflation_interest"] = input_df["Inflation_Rate_Percent"] * input_df["Interest_Rate_Percent"]
