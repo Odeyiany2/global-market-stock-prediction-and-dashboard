@@ -42,7 +42,7 @@ st.write("Predict **daily stock index % change** using macroeconomic indicators.
 
 
 # --- Sidebar for Input Features ---
-st.sidebar.header("📊 Input Features")
+st.sidebar.header("🔍 Input Features")
 
 # Function to get user input
 def user_input_features():
@@ -75,6 +75,9 @@ def user_input_features():
        'A-', 'B+', 'B-', 'CCC+'
     ])
     
+    banking_health = st.sidebar.selectbox("Banking Sector Health", ['Strong', 'Moderate', 'Weak'])
+
+    
     # Numeric inputs
     index_value = st.sidebar.number_input("Index Value", min_value=0.0, value=4000.0)
     market_cap = st.sidebar.number_input("Market Cap (Trillion USD)", min_value=0.0, value=25.0)
@@ -92,7 +95,6 @@ def user_input_features():
     gold_price = st.sidebar.number_input("Gold Price (USD/Ounce)", value=1800.0)
     bond_yield = st.sidebar.number_input("10Y Bond Yield (%)", value=3.0)
     political_risk = st.sidebar.slider("Political Risk Score", 0, 100, 50)
-    banking_health = st.sidebar.slider("Banking Sector Health", 0, 100, 70)
     real_estate_index = st.sidebar.number_input("Real Estate Index", value=200.0)
     export_growth = st.sidebar.number_input("Export Growth (%)", value=2.0)
     import_growth = st.sidebar.number_input("Import Growth (%)", value=2.0)
@@ -138,24 +140,37 @@ num_features = ['Index_Value', 'Market_Cap_Trillion_USD', 'GDP_Growth_Rate_Perce
        'Currency_Change_YTD_Percent', 'Government_Debt_GDP_Percent',
        'Current_Account_Balance_Billion_USD', 'FDI_Inflow_Billion_USD',
        'Commodity_Index', 'Oil_Price_USD_Barrel', 'Gold_Price_USD_Ounce',
-       'Bond_Yield_10Y_Percent', 'Political_Risk_Score', 'Banking_Sector_Health',
+       'Bond_Yield_10Y_Percent', 'Political_Risk_Score',
        'Real_Estate_Index', 'Export_Growth_Percent', 'Import_Growth_Percent',
        'inflation_interest', 'gdp_minus_unemp', 'oil_gold_ratio']
 input_df[num_features] = scaler.transform(input_df[num_features])
 
 #encoding categorical features
-cat_features = ["Country", "Stock_Index", "Currency_Code", "Credit_Rating"]
+cat_features = ["Country", "Stock_Index", "Currency_Code", "Credit_Rating", "Banking_Sector_Health"]
 encoded_cat = pd.DataFrame(
     encoder.transform(input_df[cat_features]),
     columns=encoder.get_feature_names_out(cat_features)
 )
 input_df = pd.concat([input_df.drop(columns=cat_features), encoded_cat], axis=1)
 
+
 # --- Prediction ---
-if st.button("Predict Stock Index Change"):
+if st.sidebar.button("Predict Stock Index Change"):
     prediction = model.predict(input_df)[0]
+    # Residual Error Band (approx using training RMSE if available)
+    # assume ±0.5% as error margin -> just for demo use
+    error_band = 0.5
+    lower_bound = prediction - error_band
+    upper_bound = prediction + error_band
+
     st.subheader("📈 Prediction Result")
     st.metric(label="Predicted Daily % Change", value=f"{prediction:.2f}%")
+    st.caption(f"Expected range: {lower_bound:.2f}% → {upper_bound:.2f}%")
+
+    st.subheader("📈 Input Features used for Predictive Analysis")
+    #show the input features 
+    st.write(input_df)
+    st.metric(label="**The Predicted Daily % Change is: **", value=f"{prediction:.2f}%")
     if prediction > 0:
         st.success("The stock index is predicted to rise 📈")
     elif prediction < 0:
