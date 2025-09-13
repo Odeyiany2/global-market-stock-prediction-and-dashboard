@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
 
 #load the trained pipeline 
 #model = joblib.load("C:\Projects_ML\global-market-stock-prediction-and-dashboard\model\stacking_sr_model.pkl")
