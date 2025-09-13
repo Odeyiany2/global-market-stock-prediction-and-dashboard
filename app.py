@@ -3,8 +3,10 @@ import pandas as pd
 import joblib
 
 
-#load the trained pipeline 
-#model = joblib.load("C:\Projects_ML\global-market-stock-prediction-and-dashboard\model\stacking_sr_model.pkl")
+#load the model and preprocessors
+model = joblib.load(r"C:\Projects_ML\global-market-stock-prediction-and-dashboard\model and preprocessors\stacking_sr_model.pkl")
+scaler = joblib.load(r"C:\Projects_ML\global-market-stock-prediction-and-dashboard\model and preprocessors\scaler.pkl")
+encoder = joblib.load(r"C:\Projects_ML\global-market-stock-prediction-and-dashboard\model and preprocessors\encoder.pkl")
 
 # --- Page Config ---
 st.set_page_config(page_title="Global Stock Market Prediction", layout="wide")
@@ -45,10 +47,33 @@ st.sidebar.header("📊 Input Features")
 # Function to get user input
 def user_input_features():
     # dropdowns
-    country = st.sidebar.selectbox("Country", ["USA", "UK", "Germany", "China", "India"])
-    stock_index = st.sidebar.text_input("Stock Index", "S&P 500")
-    currency_code = st.sidebar.selectbox("Currency Code", ["USD", "EUR", "GBP", "CNY", "INR"])
-    credit_rating = st.sidebar.selectbox("Credit Rating", ["AAA", "AA", "A", "BBB", "BB", "B", "CCC"])
+    country = st.sidebar.selectbox("Country", [
+        'United States', 'China', 'Japan', 'Germany', 'United Kingdom',
+       'France', 'India', 'Canada', 'Brazil', 'Australia', 'South Korea',
+       'Russia', 'Mexico', 'Italy', 'Spain', 'Netherlands', 'Switzerland',
+       'Sweden', 'Norway', 'Denmark', 'Singapore', 'Hong Kong', 'Taiwan',
+       'Indonesia', 'Thailand', 'Malaysia', 'Philippines', 'Vietnam',
+       'Turkey', 'South Africa', 'Egypt', 'Nigeria', 'Chile', 'Argentina',
+       'Colombia', 'Peru', 'UAE', 'Saudi Arabia', 'Israel'
+    ])
+    stock_index = st.sidebar.selectbox("Stock Index", [
+        'S&P_500', 'Shanghai_Composite', 'Nikkei_225', 'DAX', 'FTSE_100',
+       'CAC_40', 'Sensex', 'TSX', 'Bovespa', 'ASX_200', 'KOSPI', 'MOEX',
+       'IPC', 'FTSE_MIB', 'IBEX_35', 'AEX', 'SMI', 'OMX_Stockholm', 'OSE',
+       'OMXC_20', 'STI', 'Hang_Seng', 'TAIEX', 'JCI', 'SET', 'KLCI',
+       'PSE', 'VN_Index', 'BIST_100', 'JSE', 'EGX_30', 'NSE', 'IPSA',
+       'Merval', 'COLCAP', 'Lima_General', 'ADX', 'Tadawul', 'TA_125'
+    ])
+    currency_code = st.sidebar.selectbox("Currency Code", [
+        'USD', 'CNY', 'JPY', 'EUR', 'GBP', 'INR', 'CAD', 'BRL', 'AUD',
+       'KRW', 'RUB', 'MXN', 'CHF', 'SEK', 'NOK', 'DKK', 'SGD', 'HKD',
+       'TWD', 'IDR', 'THB', 'MYR', 'PHP', 'VND', 'TRY', 'ZAR', 'EGP',
+       'NGN', 'CLP', 'ARS', 'COP', 'PEN', 'AED', 'SAR', 'ILS'
+    ])
+    credit_rating = st.sidebar.selectbox("Credit Rating", [
+        'AAA', 'A+', 'AA', 'BBB-', 'BB-', 'BB+', 'BBB', 'A', 'AA+', 'BBB+',
+       'A-', 'B+', 'B-', 'CCC+'
+    ])
     
     # Numeric inputs
     index_value = st.sidebar.number_input("Index Value", min_value=0.0, value=4000.0)
@@ -107,25 +132,33 @@ input_df["inflation_interest"] = input_df["Inflation_Rate_Percent"] * input_df["
 input_df["gdp_minus_unemp"] = input_df["GDP_Growth_Rate_Percent"] - input_df["Unemployment_Rate_Percent"]
 input_df["oil_gold_ratio"] = input_df["Oil_Price_USD_Barrel"] / input_df["Gold_Price_USD_Ounce"]
 
-# #scaling numerical features
-# scaler = StandardScaler()
-# num_features = ["Index_Value", "Market_Cap", "GDP_Growth", "Inflation", "Interest_Rate", "Unemployment", 
-#                 "Exchange_Rate_to_USD", "Currency_Change_YTD", "Government_Debt_to_GDP", "Current_Account_Balance", 
-#                 "FDI_Inflow", "Commodity_Index", "Oil_Price", "Gold_Price", "10Y_Bond_Yield", "Political_Risk_Score", 
-#                 "Banking_Sector_Health", "Real_Estate_Index", "Export_Growth", "Import_Growth",
-#                 "Debt_to_Market_Cap", "inflation_interest", "gdp_minus_unemp", "oil_gold_ratio"]
-# input_df[num_features] = scaler.fit_transform(input_df[num_features])
+#scaling numerical features
+num_features = ['Index_Value', 'Market_Cap_Trillion_USD', 'GDP_Growth_Rate_Percent', 'Inflation_Rate_Percent',
+       'Interest_Rate_Percent', 'Unemployment_Rate_Percent', 'Exchange_Rate_USD',
+       'Currency_Change_YTD_Percent', 'Government_Debt_GDP_Percent',
+       'Current_Account_Balance_Billion_USD', 'FDI_Inflow_Billion_USD',
+       'Commodity_Index', 'Oil_Price_USD_Barrel', 'Gold_Price_USD_Ounce',
+       'Bond_Yield_10Y_Percent', 'Political_Risk_Score', 'Banking_Sector_Health',
+       'Real_Estate_Index', 'Export_Growth_Percent', 'Import_Growth_Percent',
+       'inflation_interest', 'gdp_minus_unemp', 'oil_gold_ratio']
+input_df[num_features] = scaler.transform(input_df[num_features])
 
-# #encoding categorical features
-# encoder = OneHotEncoder(drop = "first", sparse_output=False, handle_unknown='ignore')
-# cat_features = ["Country", "Stock_Index", "Currency_Code", "Credit_Rating"]
-# encoded_cat = pd.DataFrame(encoder.fit_transform(input_df[cat_features]), columns=encoder.get_feature_names_out(cat_features))
-# input_data = pd.concat([input_df.drop(columns=cat_features), encoded_cat], axis=1)
-
+#encoding categorical features
+cat_features = ["Country", "Stock_Index", "Currency_Code", "Credit_Rating"]
+encoded_cat = pd.DataFrame(
+    encoder.transform(input_df[cat_features]),
+    columns=encoder.get_feature_names_out(cat_features)
+)
+input_df = pd.concat([input_df.drop(columns=cat_features), encoded_cat], axis=1)
 
 # --- Prediction ---
-# Uncomment the following lines when the model is available
-# if st.button("Predict Stock Index Change"):
-#     prediction = model.predict(input_data)[0]
-#     st.subheader("📈 Prediction Result")
-#     st.metric(label="Predicted Daily % Change", value=f"{prediction:.2f}%")
+if st.button("Predict Stock Index Change"):
+    prediction = model.predict(input_df)[0]
+    st.subheader("📈 Prediction Result")
+    st.metric(label="Predicted Daily % Change", value=f"{prediction:.2f}%")
+    if prediction > 0:
+        st.success("The stock index is predicted to rise 📈")
+    elif prediction < 0:
+        st.error("The stock index is predicted to fall 📉")
+    else:
+        st.info("The stock index is predicted to remain stable ⚖️")
