@@ -17,8 +17,8 @@ page_bg_img = """
     background-size: cover;
 }
 
-/* Change default text color */
-body, p, div, h1, h2, h3, h4, h5, h6, label {
+/* Change default text color for the main background only*/
+[data-testid="stAppViewContainer"] .body,p,h1,h4, h2, h3, h5, h6 {
     color: black !important;
 }
 
@@ -28,13 +28,14 @@ body, p, div, h1, h2, h3, h4, h5, h6, label {
 [data-testid="stSidebar"] {
     background: linear-gradient(135deg, #00b09b, #006400);
 }
+
 </style>
 """
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # --- Page Title ---
-st.title("🌍 Global Stock Market Prediction App")
+st.title("🌍 Global Stock Market Prediction App 📈")
 st.write("Predict **daily stock index % change** using macroeconomic indicators.", )
 
 
@@ -103,8 +104,8 @@ input_df = user_input_features()
 
 # --Feature Engineering---
 # Example: Creating a new feature - Debt to Market Cap Ratio
-input_df["Debt_to_Market_Cap"] = (input_df["Government_Debt_GDP_Percent"] * input_df["Market_Cap_Trillion_USD"]) / 100
-input_df["Debt_to_Market_Cap"] = input_df["Debt_to_Market_Cap"].replace([float('inf'), -float('inf')], 0).fillna(0)
+# input_df["Debt_to_Market_Cap"] = (input_df["Government_Debt_GDP_Percent"] * input_df["Market_Cap_Trillion_USD"]) / 100
+# input_df["Debt_to_Market_Cap"] = input_df["Debt_to_Market_Cap"].replace([float('inf'), -float('inf')], 0).fillna(0)
 
 input_df["inflation_interest"] = input_df["Inflation_Rate_Percent"] * input_df["Interest_Rate_Percent"]
 input_df["gdp_minus_unemp"] = input_df["GDP_Growth_Rate_Percent"] - input_df["Unemployment_Rate_Percent"]
