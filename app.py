@@ -181,3 +181,16 @@ if st.sidebar.button("Predict Stock Index Change"):
         st.error("The stock index is predicted to fall 📉")
     else:
         st.info("The stock index is predicted to remain stable ⚖️")
+
+
+
+
+
+
+
+
+# --- Footer ---st.markdown("---")
+st.markdown("---")
+
+st.markdown("Built by Miriam Itopa Odeyiany © 2025")
+st.markdown("Find the project on [GitHub](https://github.com/Odeyiany2/global-market-stock-prediction-and-dashboard/tree/main)")
