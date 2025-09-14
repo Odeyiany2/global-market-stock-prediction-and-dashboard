@@ -61,3 +61,9 @@ It also includes:
 * Built a dual-deployment solution (Streamlit + Power BI) for both prediction and storytelling.
 
 * Insights: Political risk, interest rates, and GDP growth showed strong correlations with stock market volatility.
+
+## **🙌 Acknowledgements**
+
+* Dataset sourced from Kaggle: [Global Finance Data 2024](https://www.kaggle.com/datasets/imaadmahmood/global-finance-and-economic-indicators-dataset-2024)
+
+* Inspired by the intersection of Data Science, Finance, and Risk Management.
