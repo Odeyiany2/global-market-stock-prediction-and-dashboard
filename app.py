@@ -1,12 +1,14 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
 
 
 #load the model and preprocessors
-model = joblib.load(r"C:\Projects_ML\global-market-stock-prediction-and-dashboard\model and preprocessors\stacking_sr_model.pkl")
-scaler = joblib.load(r"C:\Projects_ML\global-market-stock-prediction-and-dashboard\model and preprocessors\scaler.pkl")
-encoder = joblib.load(r"C:\Projects_ML\global-market-stock-prediction-and-dashboard\model and preprocessors\encoder.pkl")
+# import os
+model = joblib.load(os.path.join("model and preprocessors", "stacking_sr_model.pkl"))
+scaler = joblib.load(os.path.join("model and preprocessors", "scaler.pkl"))
+encoder = joblib.load(os.path.join("model and preprocessors", "encoder.pkl"))
 
 # --- Page Config ---
 st.set_page_config(page_title="Global Stock Market Prediction", layout="wide")
