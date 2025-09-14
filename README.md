@@ -2,9 +2,15 @@
 
 ## 📌 **Project Overview**
 
-This project analyzes financial and macroeconomic data from 39 countries (2024) to understand the relationship between stock market performance and key economic indicators such as GDP growth, inflation, interest rates, unemployment, and political risk.
+This project analyzes global financial and macroeconomic data across 39 countries to understand the relationships between stock indices, economic indicators, and risk factors.
 
-Using Python for data cleaning, exploratory analysis, machine learning streamlit for an interactive web app and Power BI for dashboard visualization, the project identifies the main drivers of stock performance and builds predictive models for investment insights. The machine learning algorithm predicts **daily percentage (%) change** in the stock market
+Using Machine Learning (Stacking Regressor), the project predicts daily stock index percentage changes based on features such as GDP growth, inflation, interest rates, unemployment, commodity prices, and political risk scores.
+
+It also includes:
+
+* An interactive Streamlit app where users can input macroeconomic indicators and get stock market predictions.
+
+* A Power BI dashboard for financial storytelling, allowing dynamic exploration of global markets, risks, and stability.
 
 ## 🔎 **Objectives**
 
@@ -13,3 +19,37 @@ Using Python for data cleaning, exploratory analysis, machine learning streamlit
 * Build machine learning models to predict stock market performance.
 
 * Create a dashboard to visualize insights for investors and policymakers.
+
+## **🛠️ Tech Stack**
+
+* Languages: Python, SQL
+
+* Libraries: pandas, scikit-learn, LightGBM, joblib, matplotlib, seaborn
+
+* Deployment: Streamlit
+
+* Visualization: Power BI
+
+* Version Control: Git/GitHub
+
+## **📊 Key Features**
+
+* Data cleaning, feature engineering, and model training for predictive analytics
+
+* Stock market prediction using an ensemble Stacking Regressor (achieved R² ≈ 0.8)
+
+* Exploratory Data Analysis with insights into GDP, inflation, and trade dynamics
+
+* Streamlit App: Interactive prediction tool with user input & visualization
+
+* Power BI Dashboard:
+
+   * Market Cap rankings (Top 10 countries)
+
+   * GDP vs Inflation scatter plots
+
+   * Political Risk heatmap
+
+   * Oil & Gold price trends
+
+   * Predicted vs Actual market performance
