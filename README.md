@@ -75,7 +75,7 @@ It also includes:
   streamlit run app.py
   ```
 
-## ** 🚀 Deployments**
+## **🚀Deployments**
 * PowerBI
   
 * Streamlit App
