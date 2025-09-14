@@ -48,11 +48,9 @@ It also includes:
 
    * GDP vs Inflation scatter plots
 
-   * Political Risk heatmap
+   * Political map
 
-   * Oil & Gold price trends
-
-   * Predicted vs Actual market performance
+   * Stock Index by Index Value
 
 ## **📈 Results**
 
