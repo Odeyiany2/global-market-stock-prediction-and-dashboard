@@ -53,3 +53,11 @@ It also includes:
    * Oil & Gold price trends
 
    * Predicted vs Actual market performance
+
+## **📈 Results**
+
+* Achieved R² score of 0.8 on test data using a Stacking Regressor.
+
+* Built a dual-deployment solution (Streamlit + Power BI) for both prediction and storytelling.
+
+* Insights: Political risk, interest rates, and GDP growth showed strong correlations with stock market volatility.
