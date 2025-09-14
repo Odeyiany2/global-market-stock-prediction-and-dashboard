@@ -157,21 +157,23 @@ input_df = pd.concat([input_df.drop(columns=cat_features), encoded_cat], axis=1)
 # --- Prediction ---
 if st.sidebar.button("Predict Stock Index Change"):
     prediction = model.predict(input_df)[0]
+
+    
+    st.markdown("### 📈 Input Features used for Predictive Analysis")
+    #show the input features 
+    st.write(input_df)
     # Residual Error Band (approx using training RMSE if available)
     # assume ±0.5% as error margin -> just for demo use
     error_band = 0.5
     lower_bound = prediction - error_band
     upper_bound = prediction + error_band
 
-    st.subheader("📈 Prediction Result")
-    st.metric(label="Predicted Daily % Change", value=f"{prediction:.2f}%")
-    st.caption(f"Expected range: {lower_bound:.2f}% → {upper_bound:.2f}%")
+    st.markdown("#### 📈 Prediction Result")
+    st.markdown(f"##### The model predicts a daily stock index change of {prediction:.2f}%")
+    st.write(f"Expected range: {lower_bound:.2f}% → {upper_bound:.2f}%")
 
-    st.markdown("### 📈 Input Features used for Predictive Analysis")
-    #show the input features 
-    st.write(input_df)
-    # Display prediction interpretation
-    st.markdown(f"#### The model predicts a daily stock index change of **{prediction:.2f}%**.")
+    # # Display prediction interpretation
+    # st.markdown(f"#### The model predicts a daily stock index change of **{prediction:.2f}%**.")
     #st.metric(label="**The Predicted Daily % Change is: **", value=f"{prediction:.2f}%")
     if prediction > 0:
         st.success("The stock index is predicted to rise 📈")
