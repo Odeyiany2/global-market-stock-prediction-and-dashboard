@@ -78,7 +78,7 @@ It also includes:
 ## **🚀Deployments**
 * [PowerBI Dashboard](https://app.powerbi.com/links/iJimkI5KoF?ctid=5fe78ac1-1afe-4009-aa04-a71efb4a5042&pbi_source=linkShare)
   
-* Streamlit App
+* [Streamlit App](https://odeyiany2-global-market-stock-prediction-and-dashboa-app-9uzgkw.streamlit.app/)
 
   
 ## **🙌 Acknowledgements**
