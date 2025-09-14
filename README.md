@@ -76,7 +76,7 @@ It also includes:
   ```
 
 ## **🚀Deployments**
-* PowerBI
+* [PowerBI Dashboard](https://app.powerbi.com/links/iJimkI5KoF?ctid=5fe78ac1-1afe-4009-aa04-a71efb4a5042&pbi_source=linkShare)
   
 * Streamlit App
 
