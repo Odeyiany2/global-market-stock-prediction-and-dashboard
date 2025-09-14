@@ -60,6 +60,27 @@ It also includes:
 
 * Insights: Political risk, interest rates, and GDP growth showed strong correlations with stock market volatility.
 
+## **🚀 How to Run Locally**
+* Clone the repo
+  ```
+  git clone https://github.com/your-username/global-market-stock-prediction.git
+  cd global-market-stock-prediction
+  ```
+* Install Dependencies
+  ```
+  pip install -r requirements.txt
+  ```
+* Run the Streamlit App
+  ```
+  streamlit run app.py
+  ```
+
+## ** 🚀 Deployments**
+* PowerBI
+  
+* Streamlit App
+
+  
 ## **🙌 Acknowledgements**
 
 * Dataset sourced from Kaggle: [Global Finance Data 2024](https://www.kaggle.com/datasets/imaadmahmood/global-finance-and-economic-indicators-dataset-2024)
